@@ -1,8 +1,9 @@
+
 import edu.macalester.graphics.CanvasWindow;
 import edu.macalester.graphics.Image;
 import edu.macalester.graphics.Rectangle;
 import edu.macalester.graphics.events.Key;
-public class Duck {
+public class GrayDuck {
 
     public Image image;
     public Rectangle box;
@@ -11,7 +12,7 @@ public class Duck {
   
     public String imagePath;
     
-    public Duck(double x, double y, String imagePath, CanvasWindow canvas) {
+    public GrayDuck(double x, double y, String imagePath, CanvasWindow canvas) {
         this.imagePath = imagePath;
         this.canvas = canvas;
         image = new Image(x, y);
@@ -103,7 +104,7 @@ public class Duck {
     public static void main(String[] args) {
         String title = "Duck Duck Grey Duck!!";
         CanvasWindow canvas = new CanvasWindow(title, 1000, 750);
-        new Duck(canvas.getCenter().getX(), canvas.getCenter().getY(), "ducks/grayDuck_1R.png", canvas);
+        new GrayDuck(canvas.getCenter().getX(), canvas.getCenter().getY(), "ducks/grayDuck_1R.png", canvas);
         
 
     }
