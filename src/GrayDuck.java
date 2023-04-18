@@ -104,6 +104,9 @@ public class GrayDuck {
     public static void main(String[] args) {
         String title = "Duck Duck Grey Duck!!";
         CanvasWindow canvas = new CanvasWindow(title, 1000, 750);
+        Image backdrop = new Image(0, 0, "ducks/Mill District.png");
+        canvas.add(backdrop);
+        canvas.draw();
         new GrayDuck(canvas.getCenter().getX(), canvas.getCenter().getY(), "ducks/grayDuck_1R.png", canvas);
         
 
