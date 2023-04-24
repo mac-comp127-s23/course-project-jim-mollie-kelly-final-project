@@ -1,3 +1,4 @@
+package DuckDuckGreyDuck;
 import edu.macalester.graphics.CanvasWindow;
 import edu.macalester.graphics.FontStyle;
 import edu.macalester.graphics.GraphicsText;
@@ -70,3 +71,5 @@ public class MainGame {
         new GrayDuck(canvas.getCenter().getX(), canvas.getCenter().getY(), "ducks/grayDuck_1R.png", canvas);
         canvas.draw();
     }
+
+}

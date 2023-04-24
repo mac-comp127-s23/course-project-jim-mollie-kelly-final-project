@@ -42,11 +42,11 @@ public class PinPoint extends Image{
             
         }
 
-    }
+    
 
-    // public static void main(String[] args){
-    //     canvas = new CanvasWindow("Duck, Duck, Gray Duck", 1000, 1000);
-    //     PinPoint pin = new PinPoint(200, 300, "pins/point-objects.png", canvas);
-    //     canvas.draw();
-    // }
+    public static void main(String[] args){
+        canvas = new CanvasWindow("Duck, Duck, Gray Duck", 1000, 1000);
+        PinPoint pin = new PinPoint(200, 300, "pins/point-objects.png", canvas);
+        canvas.draw();
+    }
 }
