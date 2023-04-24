@@ -1,4 +1,4 @@
-
+package DuckDuckGreyDuck;
 import edu.macalester.graphics.CanvasWindow;
 import edu.macalester.graphics.Image;
 import edu.macalester.graphics.Rectangle;
@@ -108,11 +108,12 @@ public class GrayDuck {
         canvas.add(backdrop);
         canvas.draw();
         new GrayDuck(canvas.getCenter().getX(), canvas.getCenter().getY(), "ducks/grayDuck_1R.png", canvas);
-        
+        CanvasWindow canvas2 = new CanvasWindow("canvas", 500, 425);
+        GameMenu run = new GameMenu(canvas2);
 
-    }
+    // }
 }
 
 
    
-
+}
