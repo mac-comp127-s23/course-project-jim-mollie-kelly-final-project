@@ -35,8 +35,12 @@ public class PinPoint extends Image{
 
     // When the mouse pointer is hovered over the pin point, the pin point lights up 
     // Reminder: make sure the conditions only check for the pin points.
-    public void onHover(CanvasWindow canvas, GrayDuck duck){
+    public void onHoverCollision(CanvasWindow canvas, GrayDuck duck){
         GraphicsObject obj = canvas.getElementAt(duck.getX(), duck.getY()); 
+        if(obj != null && obj == duck){
+            
+        }
+
     }
 
     // public static void main(String[] args){
