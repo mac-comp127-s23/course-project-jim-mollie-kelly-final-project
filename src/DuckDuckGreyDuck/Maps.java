@@ -13,10 +13,13 @@ import java.util.Scanner;
 
 public class Maps {
     public ArrayList<String> maps;
-    public Maps() {
-        FileReader reader = new FileReader("maps.txt");
-
+    public Maps(CanvasWindow canvas) {
+        
     }
+
+public 
+
+
 
     
 }
