@@ -1,44 +1,55 @@
 package DuckDuckGreyDuck;
 
+import java.io.FileReader;
+
 import edu.macalester.graphics.CanvasWindow;
+import edu.macalester.graphics.GraphicsObject;
 import edu.macalester.graphics.GraphicsText;
 import edu.macalester.graphics.Image;
+import edu.macalester.graphics.ui.Button;
 
 public class PopUpWindow {
-
-    private static final String US_BANK = "";
-    public Image locationDuck;
-    public Image background;
-
+    public Button quitButton;
     public CanvasWindow popUp;
-    public String location;
+    
 
     
 
-    public PopUpWindow(String location){
-        this.location = location;
-        
-        this.locationDuck = locationDuck;
-        this.text = text;
-        this.background = background;
+    public PopUpWindow(String location, int locationIndex){
         popUp = new CanvasWindow(location, 500, 500);
+        MapInfo mapInfo = new MapInfo(location, locationIndex);
+        createBackground(mapInfo.getBackground());
+        createBird(mapInfo.getBird());
+        createGraphicsText(mapInfo.getInfo());
+        createQuitButton();
+        quitOnClick();
     }
-    public void createBackground(){
-        popUp.add(background, 0, 0);
+
+    public void createBackground(Image background){
+        addToCanvas(background, 0, 0);
+    }
+
+    public void createBird(Image bird){
+        bird.setMaxHeight(200);
+        addToCanvas(bird, 0, 250);
+    }
+
+    public void createGraphicsText(String info){
+        GraphicsText text = new GraphicsText(info);
+        addToCanvas(text, 0, 0);
+    }
+
+    public void createQuitButton(){
+        this.quitButton = new Button("Return to Map");
+        addToCanvas(quitButton, 0, 0);
+    }
+
+    public void addToCanvas(GraphicsObject obj, double x, double y){
+        popUp.add(obj, x, y);
         popUp.draw();
     }
 
-    public void addText(){
-        popUp.add(background, 0, 0);
-    }
-
-    public void setLocation(){
-        if (location == "US Bank"){
-            createGraphicsText(MILL_DISTRICT_INFO);
-        }
-    }
-    public GraphicsText createGraphicsText(String string){
-        GraphicsText text = new GraphicsText(string);
-        return text;
+    public void quitOnClick(){
+        quitButton.onClick(() -> popUp.closeWindow());
     }
 }
