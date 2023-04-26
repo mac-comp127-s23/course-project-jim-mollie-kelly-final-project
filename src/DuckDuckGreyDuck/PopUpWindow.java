@@ -3,12 +3,18 @@ package DuckDuckGreyDuck;
 import edu.macalester.graphics.CanvasWindow;
 import edu.macalester.graphics.GraphicsText;
 import edu.macalester.graphics.Image;
+import edu.macalester.graphics.GraphicsObject;
+import edu.macalester.graphics.ui.Button;
+import java.io.FileReader;
 
-public class PopUpWindow extends CanvasWindow{
+public class PopUpWindow{
 
     /**
      * Instance variables
      */
+
+    private Button quitButton;
+
     private static final String US_BANK = "", MILL_DISTRICT_INFO ="";
     private Image locationDuck, background;
     private static final int winWidth = 500, winHeight = 500;
@@ -17,13 +23,14 @@ public class PopUpWindow extends CanvasWindow{
 
 
 
-    public PopUpWindow(String location){
-        super(location, winWidth, winHeight);
-        this.location = location;
-        this.locationDuck = locationDuck;
-        // this.text = text;
-        this.background = background;
-        
+    public PopUpWindow(String location, int locationIndex){
+        popUp = new CanvasWindow(location, winWidth, winHeight);
+        MapInfo mapInfo = new MapInfo(location, locationIndex);
+        createBackground(mapInfo.getBackground());
+        createBird(mapInfo.getBird());
+        createGraphicsText(mapInfo.getInfo());
+        createQuitButton();
+        quitOnClick();
     }
 
     /**
@@ -53,34 +60,9 @@ public class PopUpWindow extends CanvasWindow{
     /**
      * Creates graphics text
      */
-    public GraphicsText createGraphicsText(String string){
-        GraphicsText text = new GraphicsText(string);
-        return text;
-    }
-}
-import java.io.FileReader;
-
-import edu.macalester.graphics.CanvasWindow;
-import edu.macalester.graphics.GraphicsObject;
-import edu.macalester.graphics.GraphicsText;
-import edu.macalester.graphics.Image;
-import edu.macalester.graphics.ui.Button;
-
-public class PopUpWindow {
-    public Button quitButton;
-    public CanvasWindow popUp;
-    
-
-    
-
-    public PopUpWindow(String location, int locationIndex){
-        popUp = new CanvasWindow(location, 500, 500);
-        MapInfo mapInfo = new MapInfo(location, locationIndex);
-        createBackground(mapInfo.getBackground());
-        createBird(mapInfo.getBird());
-        createGraphicsText(mapInfo.getInfo());
-        createQuitButton();
-        quitOnClick();
+    public void createGraphicsText(String info){
+        GraphicsText text = new GraphicsText(info);
+        addToCanvas(text, 0, 0);
     }
 
     public void createBackground(Image background){
@@ -90,11 +72,6 @@ public class PopUpWindow {
     public void createBird(Image bird){
         bird.setMaxHeight(200);
         addToCanvas(bird, 0, 250);
-    }
-
-    public void createGraphicsText(String info){
-        GraphicsText text = new GraphicsText(info);
-        addToCanvas(text, 0, 0);
     }
 
     public void createQuitButton(){

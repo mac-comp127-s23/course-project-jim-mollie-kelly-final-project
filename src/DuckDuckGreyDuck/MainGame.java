@@ -84,12 +84,14 @@ public class MainGame {
         PinPoint aPin = new PinPoint(x, y, "pins/point-objects.png", canvas);
         canvas.add(aPin);
         pinList.add(aPin);
+    }
 
     public void createQuitButton(){
         quit = new Button("Return to Map");
        // canvas.add(quit, CANVAS_HEIGHT-quit.getHeight(), CANVAS_WIDTH-quit.getWidth());
         //return quit;
     }
+
     public void quitOnClick(){
         quit.onClick(() -> canvas.closeWindow());
     }
@@ -109,17 +111,10 @@ public class MainGame {
         new PinPoint(426, 402, "pins/point-objects.png", canvas); // Mill City Museum : (426, 402)
         new GrayDuck(canvas.getCenter().getX(), canvas.getCenter().getY(), "ducks/grayDuck_1R.png", canvas);
         canvas.draw();
-    }
-
-}
-        new PinPoint(200, 300, "ducks/point-objects.png", canvas);
-        new GrayDuck(canvas.getCenter().getX(), canvas.getCenter().getY(), "ducks/grayDuck_1R.png", canvas);
-        canvas.draw();
-        PopUpWindow popup = new PopUpWindow("Mill District", 2);
+    
+        // PopUpWindow popup = new PopUpWindow("Mill District", 2);
         canvas.onClick(e -> System.out.println(e.getPosition()));
         
-       
     }
-        
 }
 

@@ -49,15 +49,12 @@ public class PinPoint extends Image{
         if(obj != null && obj == duck){
             canvas.onClick(event -> {
                 // put pop up window
-                PopUpWindow window = new PopUpWindow(imagePath);
+                PopUpWindow window = new PopUpWindow(imagePath, 0);
 
             });
         }
 
     }
-}
-
-
 
     // public static void main(String[] args){
     //     canvas = new CanvasWindow("Duck, Duck, Gray Duck", 1000, 1000);
