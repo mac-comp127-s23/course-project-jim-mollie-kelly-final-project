@@ -23,6 +23,7 @@ public class Destinations {
 
     public void setBackground(Image Background){
         this.background = background;
+        
     }
     public Image getBackground(){
         return background;

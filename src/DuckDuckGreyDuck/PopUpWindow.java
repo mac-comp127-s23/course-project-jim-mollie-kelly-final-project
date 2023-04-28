@@ -1,5 +1,6 @@
 package DuckDuckGreyDuck;
 
+import java.awt.Color;
 import java.io.FileReader;
 
 import edu.macalester.graphics.CanvasWindow;
@@ -9,14 +10,17 @@ import edu.macalester.graphics.Image;
 import edu.macalester.graphics.ui.Button;
 
 public class PopUpWindow {
+    private static int CANVAS_HEIGHT = 500;
+    private static int CANVAS_WIDTH = 500;
     public Button quitButton;
     public CanvasWindow popUp;
+    
     
 
     
 
     public PopUpWindow(String location, int locationIndex){
-        popUp = new CanvasWindow(location, 500, 500);
+        popUp = new CanvasWindow(location, CANVAS_WIDTH, CANVAS_HEIGHT);
         MapInfo mapInfo = new MapInfo(location, locationIndex);
         createBackground(mapInfo.getBackground());
         createBird(mapInfo.getBird());
@@ -26,6 +30,9 @@ public class PopUpWindow {
     }
 
     public void createBackground(Image background){
+
+        background.setMaxHeight(750);
+        background.setMaxWidth(500);
         addToCanvas(background, 0, 0);
     }
 
@@ -36,7 +43,8 @@ public class PopUpWindow {
 
     public void createGraphicsText(String info){
         GraphicsText text = new GraphicsText(info);
-        addToCanvas(text, 0, 0);
+        text.setFillColor(Color.GRAY);
+        addToCanvas(text, 30, 300);
     }
 
     public void createQuitButton(){
