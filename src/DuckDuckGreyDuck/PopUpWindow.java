@@ -1,30 +1,24 @@
 package DuckDuckGreyDuck;
 
-import java.io.FileReader;
+
 
 import edu.macalester.graphics.CanvasWindow;
 import edu.macalester.graphics.GraphicsText;
 import edu.macalester.graphics.Image;
 import edu.macalester.graphics.GraphicsObject;
 import edu.macalester.graphics.ui.Button;
-import java.io.FileReader;
 
-public class PopUpWindow extends CanvasWindow{
 
-    /**
-     * Instance variables
-     */
+
 
 public class PopUpWindow {
     public Button quitButton;
     public CanvasWindow popUp;
     
-
     
 
     public PopUpWindow(String location, int locationIndex){
-        super(location, locationIndex, locationIndex);
-        popUp = new CanvasWindow(location, winWidth, winHeight);
+       
         popUp = new CanvasWindow(location, 500, 500);
         MapInfo mapInfo = new MapInfo(location, locationIndex);
         createBackground(mapInfo.getBackground());
@@ -34,38 +28,7 @@ public class PopUpWindow {
         quitOnClick();
     }
 
-    /**
-     * Creates the background
-     */
-    public void createBackground(){
-        popUp.add(background, 0, 0);
-        popUp.draw();
-    }
-
-    /**
-     * Adds text to the background
-     */
-    public void addText(){
-        popUp.add(background, 0, 0);
-    }
-
-    /**
-     * 
-     */
-    public void setLocation(){
-        if (location == "US Bank"){
-            createGraphicsText(MILL_DISTRICT_INFO);
-        }
-    }
-
-    /**
-     * Creates graphics text
-     */
-    public void createGraphicsText(String info){
-        GraphicsText text = new GraphicsText(info);
-        addToCanvas(text, 0, 0);
-    }
-
+   
     public void createBackground(Image background){
 
         background.setMaxHeight(750);
