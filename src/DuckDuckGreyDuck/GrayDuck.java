@@ -3,16 +3,19 @@ import edu.macalester.graphics.CanvasWindow;
 import edu.macalester.graphics.Image;
 import edu.macalester.graphics.Rectangle;
 import edu.macalester.graphics.events.Key;
-public class GrayDuck {
+public class GrayDuck extends Image{
 
-    public Image image;
-    public Rectangle box;
-    public CanvasWindow canvas;
-    public double size = 100;
-  
-    public String imagePath;
+    /**
+     * Instance variables
+     */
+    private Image image;
+    private Rectangle box;
+    private CanvasWindow canvas;
+    private double size = 100;
+    private String imagePath;
     
     public GrayDuck(double x, double y, String imagePath, CanvasWindow canvas) {
+        super(x, y, imagePath);
         this.imagePath = imagePath;
         this.canvas = canvas;
         image = new Image(x, y);
@@ -24,13 +27,23 @@ public class GrayDuck {
     }
 
 
+    /**
+     * Getter - 
+     */
      public String getImagePath(){
         return imagePath;
     }
+
+    /**
+     * Setter - 
+     */
     public void setImageString(String newImagePath){
         this.imagePath = newImagePath;
     }
 
+    /**
+     * 
+     */
     public void flapHorizontal(String a, String b){
         if(getImagePath().equalsIgnoreCase(a)){
             image.setImagePath(b);
@@ -42,6 +55,9 @@ public class GrayDuck {
         } 
     }
 
+    /**
+     * Creates animations to make a flapping aniamtion.
+     */
     public void flapVertical(){
         if(getImagePath().equalsIgnoreCase("ducks/grayDuck_1R.png")){
             image.setImagePath("ducks/grayDuck_2R.png");
@@ -61,11 +77,17 @@ public class GrayDuck {
         
     }
 
+    /**
+     * Adds things into the canvas
+     */
     public void addToCanvas(){
         canvas.add(image);
         canvas.draw();
     }
 
+    /**
+     * Keeps track of what keyboard arrows are hit and moves the ducks based on what the arrow is hit.
+     */
     public void moveDuck(){
         double canvasWidth = canvas.getWidth();
         double canvasHeight = canvas.getHeight();

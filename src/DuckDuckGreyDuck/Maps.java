@@ -12,8 +12,8 @@ import java.util.Scanner;
 
 
 public class Maps {
-    public ArrayList<String> maps;
-    public Maps(CanvasWindow canvas) {
+    private ArrayList<String> maps;
+    private Maps(CanvasWindow canvas) {
         
     }
 

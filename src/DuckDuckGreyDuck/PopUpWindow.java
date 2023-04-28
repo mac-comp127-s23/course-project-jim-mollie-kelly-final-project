@@ -1,32 +1,67 @@
 package DuckDuckGreyDuck;
 
-import java.awt.Color;
 import java.io.FileReader;
 
 import edu.macalester.graphics.CanvasWindow;
-import edu.macalester.graphics.GraphicsObject;
 import edu.macalester.graphics.GraphicsText;
 import edu.macalester.graphics.Image;
+import edu.macalester.graphics.GraphicsObject;
 import edu.macalester.graphics.ui.Button;
+import java.io.FileReader;
+
+public class PopUpWindow{
+
+    /**
+     * Instance variables
+     */
 
 public class PopUpWindow {
-    private static int CANVAS_HEIGHT = 500;
-    private static int CANVAS_WIDTH = 500;
     public Button quitButton;
     public CanvasWindow popUp;
-    
     
 
     
 
     public PopUpWindow(String location, int locationIndex){
-        popUp = new CanvasWindow(location, CANVAS_WIDTH, CANVAS_HEIGHT);
+        popUp = new CanvasWindow(location, 500, 500);
         MapInfo mapInfo = new MapInfo(location, locationIndex);
         createBackground(mapInfo.getBackground());
         createBird(mapInfo.getBird());
         createGraphicsText(mapInfo.getInfo());
         createQuitButton();
         quitOnClick();
+    }
+
+    /**
+     * Creates the background
+     */
+    public void createBackground(){
+        popUp.add(background, 0, 0);
+        popUp.draw();
+    }
+
+    /**
+     * Adds text to the background
+     */
+    public void addText(){
+        popUp.add(background, 0, 0);
+    }
+
+    /**
+     * 
+     */
+    public void setLocation(){
+        if (location == "US Bank"){
+            createGraphicsText(MILL_DISTRICT_INFO);
+        }
+    }
+
+    /**
+     * Creates graphics text
+     */
+    public void createGraphicsText(String info){
+        GraphicsText text = new GraphicsText(info);
+        addToCanvas(text, 0, 0);
     }
 
     public void createBackground(Image background){
@@ -43,8 +78,7 @@ public class PopUpWindow {
 
     public void createGraphicsText(String info){
         GraphicsText text = new GraphicsText(info);
-        text.setFillColor(Color.GRAY);
-        addToCanvas(text, 30, 300);
+        addToCanvas(text, 0, 0);
     }
 
     public void createQuitButton(){
