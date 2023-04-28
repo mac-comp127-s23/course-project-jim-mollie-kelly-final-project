@@ -1,5 +1,7 @@
 package DuckDuckGreyDuck;
 
+import java.io.FileReader;
+
 import edu.macalester.graphics.CanvasWindow;
 import edu.macalester.graphics.GraphicsText;
 import edu.macalester.graphics.Image;
@@ -13,19 +15,17 @@ public class PopUpWindow extends CanvasWindow{
      * Instance variables
      */
 
-    private Button quitButton;
+public class PopUpWindow {
+    public Button quitButton;
+    public CanvasWindow popUp;
+    
 
-    private static final String US_BANK = "", MILL_DISTRICT_INFO ="";
-    private Image locationDuck, background;
-    private static final int winWidth = 500, winHeight = 500;
-    private CanvasWindow popUp;
-    private String location;
-
-
+    
 
     public PopUpWindow(String location, int locationIndex){
         super(location, locationIndex, locationIndex);
         popUp = new CanvasWindow(location, winWidth, winHeight);
+        popUp = new CanvasWindow(location, 500, 500);
         MapInfo mapInfo = new MapInfo(location, locationIndex);
         createBackground(mapInfo.getBackground());
         createBird(mapInfo.getBird());
@@ -67,12 +67,20 @@ public class PopUpWindow extends CanvasWindow{
     }
 
     public void createBackground(Image background){
+
+        background.setMaxHeight(750);
+        background.setMaxWidth(500);
         addToCanvas(background, 0, 0);
     }
 
     public void createBird(Image bird){
         bird.setMaxHeight(200);
         addToCanvas(bird, 0, 250);
+    }
+
+    public void createGraphicsText(String info){
+        GraphicsText text = new GraphicsText(info);
+        addToCanvas(text, 0, 0);
     }
 
     public void createQuitButton(){
