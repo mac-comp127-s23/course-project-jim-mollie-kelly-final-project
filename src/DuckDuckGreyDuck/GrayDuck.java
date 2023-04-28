@@ -13,6 +13,8 @@ public class GrayDuck extends Image{
     private CanvasWindow canvas;
     private double size = 100;
     private String imagePath;
+    private PinPoint pin;
+
     
     public GrayDuck(double x, double y, String imagePath, CanvasWindow canvas) {
         super(x, y, imagePath);
@@ -24,6 +26,7 @@ public class GrayDuck extends Image{
         image.setMaxHeight(size);
         addToCanvas();
         moveDuck();
+        
     }
 
 
@@ -33,6 +36,21 @@ public class GrayDuck extends Image{
      public String getImagePath(){
         return imagePath;
     }
+
+    /**
+     * Getter - 
+     */
+    public double getX2(){
+        return this.getX() + this.getWidth();
+    }
+
+    /**
+     * Getter - 
+     */
+    public double getY2(){
+        return this.getY() + this.getHeight();
+    }
+
 
     /**
      * Setter - 

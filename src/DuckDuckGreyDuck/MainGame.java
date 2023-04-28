@@ -7,7 +7,14 @@ import edu.macalester.graphics.ui.Button;
 import java.awt.Color;
 import edu.macalester.graphics.Image;
 import java.util.List;
+
+import javax.imageio.ImageIO;
+
 import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
 import edu.macalester.graphics.events.MouseButtonEventHandler;
 
 
@@ -21,17 +28,30 @@ public class MainGame {
     private GraphicsText title;
     private static final int CANVAS_WIDTH = 1000, CANVAS_HEIGHT = 750;
     private PinPoint pin;
+    private GrayDuck duck;
     private List<PinPoint> pinList;
+    private Image image2 = new Image(0, 0, "ducks/grayDuck_1R.png");
     private Button quitButton;
+    private Manager manager;
 
-    public MainGame() {
-        createQuitButton();
-        quitOnClick();
-        // canvas = new CanvasWindow("Duck, Duck, Gray Duck", CANVAS_WIDTH, CANVAS_HEIGHT);
+    public MainGame() throws IOException {
 
-        // canvas.setBackground(Color.BLACK);
+        String title = "Duck Duck Grey Duck!!";
+        CanvasWindow canvas = new CanvasWindow(title, 1000, 750);
+        
+        Image backdrop = new Image(0, 0, "ducks/Mill District.png");
+        canvas.add(backdrop);
+        canvas.draw();
 
-        // menu(canvas);
+        manager = new Manager(canvas, duck, image2);
+        duck = new GrayDuck(canvas.getCenter().getX(), canvas.getCenter().getY(), "ducks/grayDuck_1R.png", canvas);
+
+        manager.spawnPoints(pin);
+        manager.imageIntersect(pin, image2, canvas, duck);
+        // manager.onHoverCollision(canvas, duck, backdrop);
+    
+        // PopUpWindow popup = new PopUpWindow("Mill District", 2);
+        canvas.onClick(e -> System.out.println(e.getPosition()));
         
     }
 
@@ -98,23 +118,8 @@ public class MainGame {
 
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         new MainGame();
-        String title = "Duck Duck Grey Duck!!";
-        CanvasWindow canvas = new CanvasWindow(title, 1000, 750);
-        Image backdrop = new Image(0, 0, "ducks/Mill District.png");
-        canvas.add(backdrop);
-        new PinPoint(561, 12, "pins/point-objects.png", canvas); // Armory : (561, 12)
-        new PinPoint(197, 412, "pins/point-objects.png", canvas); // Gold Medal Park : (197, 412)
-        new PinPoint(922, 651, "pins/point-objects.png", canvas); // Grain Belt Sign : (922, 651)
-        new PinPoint(323, 406, "pins/point-objects.png", canvas); // Guthrie : (323, 406)
-        new PinPoint(426, 402, "pins/point-objects.png", canvas); // Mill City Museum : (426, 402)
-        new GrayDuck(canvas.getCenter().getX(), canvas.getCenter().getY(), "ducks/grayDuck_1R.png", canvas);
-        canvas.draw();
-    
-        // PopUpWindow popup = new PopUpWindow("Mill District", 2);
-        canvas.onClick(e -> System.out.println(e.getPosition()));
-        
     }
 }
 

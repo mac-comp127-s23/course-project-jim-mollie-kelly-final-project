@@ -7,7 +7,7 @@ import edu.macalester.graphics.GraphicsObject;
 import edu.macalester.graphics.ui.Button;
 import java.io.FileReader;
 
-public class PopUpWindow{
+public class PopUpWindow extends CanvasWindow{
 
     /**
      * Instance variables
@@ -24,6 +24,7 @@ public class PopUpWindow{
 
 
     public PopUpWindow(String location, int locationIndex){
+        super(location, locationIndex, locationIndex);
         popUp = new CanvasWindow(location, winWidth, winHeight);
         MapInfo mapInfo = new MapInfo(location, locationIndex);
         createBackground(mapInfo.getBackground());

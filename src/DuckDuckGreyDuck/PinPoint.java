@@ -1,4 +1,7 @@
 package DuckDuckGreyDuck;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
 import edu.macalester.graphics.CanvasWindow;
 import edu.macalester.graphics.GraphicsObject;
 import edu.macalester.graphics.Image;
@@ -9,10 +12,10 @@ public class PinPoint extends Image{
      * Instance variables
      */
     private static CanvasWindow canvas;
-    private double size = 50;
+    private double size = 50, x, y;
     private String imagePath;
     private Image image;
-    private double x, y;
+    private GrayDuck duck;
     
     public PinPoint(double x, double y, String imagePath, CanvasWindow canvas){
         super(x, y, imagePath);
@@ -38,23 +41,11 @@ public class PinPoint extends Image{
     public void addToCanvas(){
         canvas.add(image);
         canvas.draw();
-    }
+    }      
+        };
+    
 
-    /**
-     * When the mouse pointer is hovered over the pin point, the pin point lights up 
-     * Reminder: make sure the conditions only check for the pin points.
-     */
-    public void onHoverCollision(CanvasWindow canvas, GrayDuck duck){
-        GraphicsObject obj = canvas.getElementAt(duck.getX(), duck.getY()); 
-        if(obj != null && obj == duck){
-            canvas.onClick(event -> {
-                // put pop up window
-                PopUpWindow window = new PopUpWindow(imagePath, 0);
 
-            });
-        }
-
-    }
 
     // public static void main(String[] args){
     //     canvas = new CanvasWindow("Duck, Duck, Gray Duck", 1000, 1000);
@@ -63,9 +54,9 @@ public class PinPoint extends Image{
     // }
     
 
-    public static void main(String[] args){
-        canvas = new CanvasWindow("Duck, Duck, Gray Duck", 1000, 1000);
-        PinPoint pin = new PinPoint(200, 300, "ducks/point-objects.png", canvas);
-        canvas.draw();
-    }
-}
+    // public static void main(String[] args){
+    //     canvas = new CanvasWindow("Duck, Duck, Gray Duck", 1000, 1000);
+    //     PinPoint pin = new PinPoint(200, 300, "ducks/point-objects.png", canvas);
+    //     canvas.draw();
+    // }
+
