@@ -2,10 +2,14 @@ package DuckDuckGreyDuck;
 
 import edu.macalester.graphics.CanvasWindow;
 import edu.macalester.graphics.FontStyle;
+import edu.macalester.graphics.GraphicsObject;
 import edu.macalester.graphics.GraphicsText;
 import edu.macalester.graphics.ui.Button;
 import java.awt.Color;
 import edu.macalester.graphics.Image;
+import edu.macalester.graphics.Point;
+
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.imageio.ImageIO;
@@ -37,22 +41,50 @@ public class MainGame {
     public MainGame() throws IOException {
 
         String title = "Duck Duck Grey Duck!!";
-        CanvasWindow canvas = new CanvasWindow(title, 1000, 750);
-        
         Image backdrop = new Image(0, 0, "ducks/Mill District.png");
+        this.canvas = new CanvasWindow(title, CANVAS_WIDTH, CANVAS_HEIGHT);
         canvas.add(backdrop);
+        this.duck = createDuck();
+        this.manager = new Manager(canvas, duck, image2);
+       
         canvas.draw();
-
-        manager = new Manager(canvas, duck, image2);
-        duck = new GrayDuck(canvas.getCenter().getX(), canvas.getCenter().getY(), "ducks/grayDuck_1R.png", canvas);
-
         manager.spawnPoints(pin);
-        manager.imageIntersect(pin, image2, canvas, duck);
+        run();
+        //manager.imageIntersect(pin, image2, canvas, duck);
         // manager.onHoverCollision(canvas, duck, backdrop);
     
         // PopUpWindow popup = new PopUpWindow("Mill District", 2);
         canvas.onClick(e -> System.out.println(e.getPosition()));
         
+    }
+
+    public GrayDuck createDuck(){
+        this.duck = new GrayDuck(canvas.getCenter().getX(), canvas.getCenter().getY(), "ducks/grayDuck_1R.png", canvas);
+        duck.addToCanvas();
+        canvas.draw();
+        duck.moveDuck();
+        return duck;
+    }
+
+    public void checkCollison(ArrayList<Point> duckBoundList, GrayDuck duck){
+        for(int i = 0; i < duckBoundList.size(); i++){
+            GraphicsObject hit = canvas.getElementAt(duckBoundList.get(i));
+            System.out.println(duckBoundList.get(i));
+            
+            if(hit != null){
+                System.out.println(hit);
+                break;
+            }  
+        }
+    }
+
+    public void run(){
+        canvas.animate((dt) -> {
+            if(manager.getAnimating()){
+                checkCollison(duck.duckBounds(duck.getCenterX(), duck.getCenterY()), duck);
+                //System.out.println(duck.duckBounds());
+            }
+        });
     }
 
     /**
@@ -120,8 +152,7 @@ public class MainGame {
 
     public static void main(String[] args) throws IOException {
         new MainGame();
-        ;
-        
+
     }
 }
 

@@ -9,8 +9,12 @@ import java.util.List;
 import javax.imageio.ImageIO;
 
 import edu.macalester.graphics.CanvasWindow;
+import edu.macalester.graphics.GraphicsObject;
 import edu.macalester.graphics.Image;
+import edu.macalester.graphics.Point;
+
 import java.io.IOException;
+import java.security.Principal;
 import java.awt.Rectangle;
 
 
@@ -18,6 +22,7 @@ public class Manager {
     private GrayDuck duck;
     private PinPoint pin;
     private CanvasWindow window;
+    private boolean animating = true;
     private ArrayList<Rectangle> rects = new ArrayList<Rectangle>();
     private ArrayList<PinPoint> pins = new ArrayList<PinPoint>();
 
@@ -27,30 +32,37 @@ public class Manager {
         this.duck = duck;
     }
 
+    public boolean getAnimating(){
+        return this.animating;
+    }
+
     /**
      * When the duck is close to the pin points, the pin point lights up 
      * 
      */
-    public void imageIntersect(PinPoint pin, Image image2, CanvasWindow canvas, GrayDuck duck){
-        Rectangle duckBounds = new Rectangle((int) duck.getX(), (int) duck.getY(), (int) image2.getWidth(), (int) image2.getHeight());
+    // public void imageIntersect(PinPoint pin, Image image2, CanvasWindow canvas, GrayDuck duck){
+    //     Rectangle duckBounds = new Rectangle((int) duck.getX(), (int) duck.getY(), (int) image2.getWidth(), (int) image2.getHeight());
 
-        canvas.animate(event -> {
-            System.out.println(duck.getX());
-            duckBounds.setLocation((int) duck.getX(), (int) duck.getY()); //
-        });
+    //     canvas.animate(event -> {
+    //         System.out.println(duck.getX());
+    //         duckBounds.setLocation((int) duck.getX(), (int) duck.getY()); //
+    //     });
 
-        for(int i = 0; i < pins.size(); i++){
-            rects.add(new Rectangle((int) pins.get(i).getX(), (int) pins.get(i).getY(), (int) pins.get(i).getWidth(), (int) pins.get(i).getHeight()));
-        }
+    //     for(int i = 0; i < pins.size(); i++){
+    //         rects.add(new Rectangle((int) pins.get(i).getX(), (int) pins.get(i).getY(), (int) pins.get(i).getWidth(), (int) pins.get(i).getHeight()));
+    //     }
 
-        for(int i = 0; i < rects.size(); i++){
-            if(duckBounds.intersects(rects.get(i))){
-                System.out.println("hit");
+    //     for(int i = 0; i < rects.size(); i++){
+    //         if(duckBounds.intersects(rects.get(i))){
+    //             System.out.println("hit");
                 
-            }
-        }
+    //         }
+    //     }
 
-    }
+    // }
+
+   
+
 
     public void spawnPoints(PinPoint pin){
         PinPoint armory = new PinPoint(561, 12, "pins/point-objects.png", window); // Armory : (561, 12)
