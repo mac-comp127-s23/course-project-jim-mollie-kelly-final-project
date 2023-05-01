@@ -1,22 +1,28 @@
 package DuckDuckGreyDuck;
 
 import edu.macalester.graphics.Image;
-import java.util.ArrayList;
+import edu.macalester.graphics.Point;
+
 
 public class Destinations {
 
-    private ArrayList<Destinations> destinationList;
+
     private Image background;
     private Image bird;
     private String info; 
+    private PinPoint pin;
+    private Point pinPoint;
+    
 
     
     
-    public Destinations(Image background, Image bird, String info){
+    public Destinations(Image background, Image bird, String info, Point pinPoint){
        
         this.background = background;
         this.bird = bird;
         this.info = info;
+        this.pinPoint = pinPoint;
+        this.pin = getPin();
     }
 
     
@@ -41,6 +47,13 @@ public class Destinations {
     }
     public String getInfo(){
         return info;
+    }
+
+    public void setPin(Point pinPoint){
+        
+    }
+    public PinPoint getPin(){
+       return pin = new PinPoint(pinPoint.getX(), pinPoint.getY());
     }
 
 }

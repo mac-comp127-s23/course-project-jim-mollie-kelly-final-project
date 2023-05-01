@@ -8,7 +8,7 @@ import edu.macalester.graphics.Point;
 
 public class GrayDuck extends Image{
     private static final int DUCK_WIDTH = 20;
-    private static final int DUCK_HEIGHT = 50;
+    private static final int DUCK_HEIGHT = 40;
 
     /**
      * Instance variables
@@ -19,35 +19,35 @@ public class GrayDuck extends Image{
     private double size = 100;
     private String imagePath;
     private PinPoint pin;
-    private Double centerX;
-    private Double centerY;
+    private Double x;
+    private Double y;
     public ArrayList<Point> duckBoundList;
     
 
     
-    public GrayDuck(double centerX, double centerY, String imagePath, CanvasWindow canvas) {
-        super(centerX-DUCK_WIDTH/2, centerY-DUCK_HEIGHT/2, imagePath);
+    public GrayDuck(double x, double y, String imagePath, CanvasWindow canvas) {
+        super(x, y, imagePath);
         this.imagePath = imagePath;
         this.canvas = canvas;
-        this.centerX = centerX;
-        this.centerY = centerY;
-        duck = new Image(centerX-DUCK_WIDTH/2, centerY-DUCK_HEIGHT/2);
+        this.x = x;
+        this.y = y;
+        duck = new Image(x, y);
         duck.setImagePath(imagePath);
         duck.setMaxWidth(DUCK_WIDTH);
         duck.setMaxHeight(DUCK_HEIGHT);
         
     }
 
-    public ArrayList<Point> duckBounds(double cX, double cY){
+    public ArrayList<Point> duckBounds(){
 
         ArrayList<Point> duckBoundList = new ArrayList<Point>();
-        Point topLeft = new Point(cX-DUCK_WIDTH/2, cY-DUCK_HEIGHT/2);
+        Point topLeft = new Point(x, y);
         duckBoundList.add(topLeft);
-        Point topRight = new Point(cX+DUCK_WIDTH/2, cY-DUCK_HEIGHT/2);
+        Point topRight = new Point(x + DUCK_WIDTH, y);
         duckBoundList.add(topRight);
-        Point bottomLeft = new Point(cX-DUCK_WIDTH/2, cY+DUCK_HEIGHT/2);
+        Point bottomLeft = new Point(x, y + DUCK_HEIGHT);
         duckBoundList.add(bottomLeft);
-        Point bottomRight = new Point(cX+DUCK_WIDTH/2, cY+DUCK_HEIGHT/2);
+        Point bottomRight = new Point(x + DUCK_WIDTH, y + DUCK_HEIGHT);
         duckBoundList.add(bottomRight);
         Point bottomCenter = new Point((bottomLeft.getX()+ bottomRight.getX())/2, (bottomLeft.getY()+ bottomRight.getY())/2);
         duckBoundList.add(bottomCenter);
@@ -141,7 +141,7 @@ public class GrayDuck extends Image{
                 if(paddleRightX < canvasWidth){
                     flapHorizontal("ducks/grayDuck_1R.png", "ducks/grayDuck_2R.png");
                     duck.moveBy(10, 0);
-                    centerX = centerX + 10;
+                    x = x + 10;
                 }
             }
             if(key.getKey() == Key.LEFT_ARROW){
@@ -149,7 +149,7 @@ public class GrayDuck extends Image{
                 if(paddleLeftX > 0){
                     flapHorizontal("ducks/grayDuck_1L.png", "ducks/grayDuck_2L.png");
                     duck.moveBy(-10, 0);
-                    centerX = centerX - 10;
+                    x = x - 10;
                 }
             }
             if(key.getKey() == Key.UP_ARROW){
@@ -157,7 +157,7 @@ public class GrayDuck extends Image{
                 if(paddleTop < canvasHeight){
                     flapVertical();
                     duck.moveBy(0, -10);
-                    centerY = centerY - 10;
+                    y = y - 10;
                 }
             }
             if(key.getKey() == Key.DOWN_ARROW){
@@ -165,20 +165,15 @@ public class GrayDuck extends Image{
                 if(paddleBottom < canvasHeight){
                     flapVertical();
                     duck.moveBy(0, 10); 
-                    centerY = centerY + 10;
+                    y = y + 10;
                 }
             }
-        duck.setCenter(centerX, centerY); 
+        duck.setPosition(x, y);
         canvas.draw();
         });
     }
 
-    public double getCenterX(){
-        return centerX;
-    }
-    public double getCenterY(){
-        return centerY;
-    }
+    
     public static void main(String[] args) {
         // String title = "Duck Duck Grey Duck!!";
         // CanvasWindow canvas = new CanvasWindow(title, 1000, 750);
@@ -188,6 +183,7 @@ public class GrayDuck extends Image{
         // new GrayDuck(canvas.getCenter().getX(), canvas.getCenter().getY(), "ducks/grayDuck_1R.png", canvas);
         // CanvasWindow canvas2 = new CanvasWindow("canvas", 500, 425);
         // GameMenu run = new GameMenu(canvas2);
+       // PopUpWindow pop = new PopUpWindow("Mill District", 1);
 
     // }
 }

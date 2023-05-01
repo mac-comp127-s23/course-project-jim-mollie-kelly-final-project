@@ -5,22 +5,17 @@ import edu.macalester.graphics.FontStyle;
 import edu.macalester.graphics.GraphicsObject;
 import edu.macalester.graphics.GraphicsText;
 import edu.macalester.graphics.ui.Button;
-import java.awt.Color;
 import edu.macalester.graphics.Image;
 import edu.macalester.graphics.Point;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.imageio.ImageIO;
+import javax.swing.text.html.HTMLDocument.HTMLReader.HiddenAction;
 
-import java.awt.event.MouseEvent;
-import java.awt.image.BufferedImage;
-import java.io.File;
+
+
 import java.io.IOException;
-
-import edu.macalester.graphics.events.MouseButtonEventHandler;
-
 
 public class MainGame {
     
@@ -33,56 +28,65 @@ public class MainGame {
     private static final int CANVAS_WIDTH = 1000, CANVAS_HEIGHT = 750;
     private PinPoint pin;
     private GrayDuck duck;
+    private Image backdrop;
     private List<PinPoint> pinList;
-    private Image image2 = new Image(0, 0, "ducks/grayDuck_1R.png");
     private Button quitButton;
     private Manager manager;
+    private MapInfo mapInfo;
 
     public MainGame() throws IOException {
 
         String title = "Duck Duck Grey Duck!!";
-        Image backdrop = new Image(0, 0, "ducks/Mill District.png");
+        this.backdrop = new Image(0, 0, "ducks/Mill District.png");
         this.canvas = new CanvasWindow(title, CANVAS_WIDTH, CANVAS_HEIGHT);
         canvas.add(backdrop);
+        
+        this.mapInfo = createMapInfo();
         this.duck = createDuck();
-        this.manager = new Manager(canvas, duck, image2);
+        this.manager = new Manager(canvas, duck, mapInfo);
+        manager.createMapPoints();
        
-        canvas.draw();
-        manager.spawnPoints(pin);
         run();
-        //manager.imageIntersect(pin, image2, canvas, duck);
-        // manager.onHoverCollision(canvas, duck, backdrop);
-    
+        //checkCollison(duck.duckBounds(duck.getX(), duck.getY()), duck);
         // PopUpWindow popup = new PopUpWindow("Mill District", 2);
         canvas.onClick(e -> System.out.println(e.getPosition()));
         
     }
 
+    public MapInfo createMapInfo(){
+        this.mapInfo = new MapInfo("Mill District");
+        return mapInfo;
+    }
+
     public GrayDuck createDuck(){
-        this.duck = new GrayDuck(canvas.getCenter().getX(), canvas.getCenter().getY(), "ducks/grayDuck_1R.png", canvas);
+        duck = new GrayDuck(canvas.getCenter().getX(), canvas.getCenter().getY(), "ducks/grayDuck_1R.png", canvas);
         duck.addToCanvas();
         canvas.draw();
         duck.moveDuck();
         return duck;
     }
 
-    public void checkCollison(ArrayList<Point> duckBoundList, GrayDuck duck){
+    public void checkCollison(ArrayList<Point> duckBoundList){
         for(int i = 0; i < duckBoundList.size(); i++){
-            GraphicsObject hit = canvas.getElementAt(duckBoundList.get(i));
-            System.out.println(duckBoundList.get(i));
-            
-            if(hit != null){
-                System.out.println(hit);
-                break;
-            }  
-        }
-    }
+            for (int j = 0; j < mapInfo.getNumLocations(); j++){
+                GraphicsObject hit = canvas.getElementAt(duckBoundList.get(i));
+                if(hit != backdrop){
+                        if(hit.equals(mapInfo.getPin(j))){
+                            manager.setAnimating(false);
+                            PopUpWindow pop = new PopUpWindow(mapInfo.getMap(), j);
+                        }
+                }
+        }   }}
+        
+    
+
+
 
     public void run(){
         canvas.animate((dt) -> {
             if(manager.getAnimating()){
-                checkCollison(duck.duckBounds(duck.getCenterX(), duck.getCenterY()), duck);
-                //System.out.println(duck.duckBounds());
+                checkCollison(duck.duckBounds());
+                
             }
         });
     }
@@ -131,12 +135,12 @@ public class MainGame {
         start.onClick(null);
     }
 
-    // might take out
-    public void pinPt(double x, double y){
-        PinPoint aPin = new PinPoint(x, y, "pins/point-objects.png", canvas);
-        canvas.add(aPin);
-        pinList.add(aPin);
-    }
+    // // might take out
+    // public void pinPt(double x, double y){
+    //     PinPoint aPin = new PinPoint(x, y, "pins/point-objects.png");
+    //     canvas.add(aPin);
+    //     pinList.add(aPin);
+    // }
 
     public void createQuitButton(){
         quit = new Button("Return to Map");

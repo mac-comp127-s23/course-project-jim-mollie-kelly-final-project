@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Map;
 
 import edu.macalester.graphics.Image;
+import edu.macalester.graphics.Point;
 
 public class MapInfo {
 
@@ -33,27 +34,33 @@ public class MapInfo {
         "mill city museum string",
     };
 
-
-   
-    public int locationIndex;
+    private static final Point[] MILL_PINPOINTS = {
+        new Point(561, 12),  // Armory : (561, 12)
+        new Point(197, 412),  // Gold Medal Park : (197, 412)
+        new Point(922, 651),  // Grain Belt Sign : (922, 651)
+        new Point(323, 406),  // Guthrie : (323, 406)
+        new Point(426, 402),  // Mill City Museum : (426, 402)
+    };
     public DestinationsList millList = new DestinationsList();
     public DestinationsList loringList = new DestinationsList();
     public DestinationsList warehouseList = new DestinationsList();
     public DestinationsList list;
+    public String map;
 
 
-    public MapInfo(String map, int locationIndex){
-        this.locationIndex = locationIndex;
+    public MapInfo(String map){
+        this.map = map;
         setDestinations();
         setList(map);
     }
 
+    public String getMap(){
+        return map;
+    }
+
     public void setDestinations(){
         for(int i = 0; i < NUM_LOCATIONS; i++){
-            millList.addDestination(new Destinations(MILL_BACKGROUNDS[i], MILL_BIRDS[i], MILL_INFO[i]));
-            System.out.println(MILL_BACKGROUNDS[i]);
-            System.out.println(MILL_BIRDS[i]);
-            System.out.println(MILL_INFO[i]);
+            millList.addDestination(new Destinations(MILL_BACKGROUNDS[i], MILL_BIRDS[i], MILL_INFO[i], MILL_PINPOINTS[i]));
         }
     }
 
@@ -73,17 +80,39 @@ public class MapInfo {
         return list;
     }
     
-    public Image getBackground(){
-        System.out.println(locationIndex);
+    public Image getBackground(int locationIndex){
         return getDestinationsList().getDestination(locationIndex).getBackground();
-        
     }
 
-    public Image getBird(){
+    public Image getBird(int locationIndex){
         return getDestinationsList().getDestination(locationIndex).getBird();
     }
 
-    public String getInfo(){
+    public String getInfo(int locationIndex){
         return getDestinationsList().getDestination(locationIndex).getInfo();
     }
+
+    public PinPoint getPin(int locationIndex){
+        return getDestinationsList().getDestination(locationIndex).getPin();
+    }
+
+    public Point getPinPoint(int locationIndex){
+        Point point = new Point(getDestinationsList().getDestination(locationIndex).getPin().getX(), getDestinationsList().getDestination(locationIndex).getPin().getY());
+        return point ;
+    }
+
+    public double getPinX(int locationIndex){
+        return getDestinationsList().getDestination(locationIndex).getPin().getX();
+    }
+
+    public double getPinY(int locationIndex){
+        return getDestinationsList().getDestination(locationIndex).getPin().getY();
+    }
+
+    public int getNumLocations(){
+        return NUM_LOCATIONS;
+    }
+
+   
+
 }
