@@ -16,21 +16,22 @@ public class PopUpWindow {
     public CanvasWindow popUp;
     public String location;
     public int locationIndex;
+    public boolean quitClicked;
     
     
 
     public PopUpWindow(String location, int locationIndex){
         this.location = location;
         this.locationIndex = locationIndex;
-        popUp = new CanvasWindow(location, 500, 500);
         createPopUp();
-        popUp.draw();
         quitOnClick();
+        popUp.draw();
         
         
     }
    
     public void createPopUp(){
+        popUp = new CanvasWindow(location, 500, 500);
         MapInfo mapInfo = new MapInfo(location);
         createBackground(mapInfo.getBackground(locationIndex));
         createBird(mapInfo.getBird(locationIndex));
@@ -60,8 +61,20 @@ public class PopUpWindow {
        
     }
 
+    public void setQuit(boolean quit){
+        this.quitClicked = quit;
+    }
+
+    public boolean getQuit(){
+        return quitClicked;
+    }
+
 
     public void quitOnClick(){
-        quitButton.onClick(() -> popUp.closeWindow());
+        quitButton.onClick(() -> {
+            popUp.closeWindow();
+            setQuit(true);
+            popUp.removeAll();
+            });
     }
 }

@@ -7,8 +7,8 @@ import edu.macalester.graphics.events.Key;
 import edu.macalester.graphics.Point;
 
 public class GrayDuck extends Image{
-    private static final int DUCK_WIDTH = 20;
-    private static final int DUCK_HEIGHT = 40;
+    private static final int DUCK_WIDTH = 40;
+    private static final int DUCK_HEIGHT = 60;
 
     /**
      * Instance variables
@@ -97,6 +97,12 @@ public class GrayDuck extends Image{
             setImageString(a);
             
         } 
+    }
+
+    public void resetDuck(){
+        x = canvas.getCenter().getX();
+        y = canvas.getCenter().getY();
+        setPosition(x, y);
     }
 
     /**

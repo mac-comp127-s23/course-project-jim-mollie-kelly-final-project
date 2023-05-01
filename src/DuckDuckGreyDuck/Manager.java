@@ -27,6 +27,7 @@ public class Manager {
     private ArrayList<Rectangle> rects = new ArrayList<Rectangle>();
     private ArrayList<PinPoint> pins = new ArrayList<PinPoint>();
     private MapInfo mapInfo;
+    public int locationIndex;
 
     
     public Manager(CanvasWindow canvas, GrayDuck duck, MapInfo mapInfo) throws IOException{
@@ -42,15 +43,24 @@ public class Manager {
         canvas.draw();
     }
 
-    public void createPopUp(int locationIndex){
-        PopUpWindow popup = new PopUpWindow(mapInfo.getMap(), locationIndex);
+    public void createPopUp(){
+        PopUpWindow popup = new PopUpWindow(mapInfo.getMap(), getPopUpIndex());
     }
 
+    public void setPopUpIndex(int locationIndex){
+        this.locationIndex = locationIndex;
+    }
+
+
+  
+
+    public int getPopUpIndex(){
+        return locationIndex;
+    }
     // public void clickPopUp(GraphicsObject o){
     //     o.onClick(() -> popUp.closeWindow());
     // }
 
-   
 
 
 

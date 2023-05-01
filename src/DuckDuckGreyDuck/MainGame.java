@@ -47,8 +47,6 @@ public class MainGame {
         manager.createMapPoints();
        
         run();
-        //checkCollison(duck.duckBounds(duck.getX(), duck.getY()), duck);
-        // PopUpWindow popup = new PopUpWindow("Mill District", 2);
         canvas.onClick(e -> System.out.println(e.getPosition()));
         
     }
@@ -66,28 +64,33 @@ public class MainGame {
         return duck;
     }
 
-    public void checkCollison(ArrayList<Point> duckBoundList){
+    public boolean checkCollison(ArrayList<Point> duckBoundList){
         for(int i = 0; i < duckBoundList.size(); i++){
             for (int j = 0; j < mapInfo.getNumLocations(); j++){
                 GraphicsObject hit = canvas.getElementAt(duckBoundList.get(i));
-                if(hit != backdrop){
-                        if(hit.equals(mapInfo.getPin(j))){
-                            manager.setAnimating(false);
-                            PopUpWindow pop = new PopUpWindow(mapInfo.getMap(), j);
-                        }
+                    if(hit.equals(mapInfo.getPin(j))){
+                        manager.setPopUpIndex(j);
+                        return true;
+                    }
                 }
-        }   }}
+        }
+        return false;  
+        //return manager.getPopUpIndex(); 
+    }
         
     
 
 
 
     public void run(){
-        canvas.animate((dt) -> {
+        canvas.onKeyDown((dt) -> {
             if(manager.getAnimating()){
-                checkCollison(duck.duckBounds());
-                
+                if(checkCollison(duck.duckBounds())){
+                    duck.resetDuck();
+                    canvas.draw();
+                    manager.createPopUp();
             }
+        }
         });
     }
 
