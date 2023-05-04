@@ -21,7 +21,7 @@ public class GrayDuck extends Image{
     private PinPoint pin;
     private Double x;
     private Double y;
-    public ArrayList<Point> duckBoundList;
+    private ArrayList<Point> duckBoundList;
     
 
     

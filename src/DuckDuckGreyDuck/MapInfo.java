@@ -41,11 +41,11 @@ public class MapInfo {
         new Point(323, 406),  // Guthrie : (323, 406)
         new Point(426, 402),  // Mill City Museum : (426, 402)
     };
-    public DestinationsList millList = new DestinationsList();
-    public DestinationsList loringList = new DestinationsList();
-    public DestinationsList warehouseList = new DestinationsList();
-    public DestinationsList list;
-    public String map;
+    private DestinationsList millList = new DestinationsList();
+    private DestinationsList loringList = new DestinationsList();
+    private DestinationsList warehouseList = new DestinationsList();
+    private DestinationsList list;
+    private String map;
 
 
     public MapInfo(String map){

@@ -23,12 +23,13 @@ public class MainGame {
      * Instance variables
      */
     private CanvasWindow canvas;
-    private Button start, quit;
+    private Button start, quit, test;
     private GraphicsText title;
+    private GraphicsText menuTitle;
     private static final int CANVAS_WIDTH = 1000, CANVAS_HEIGHT = 750;
     private PinPoint pin;
     private GrayDuck duck;
-    private Image backdrop;
+    private Image backdrop = new Image(0, 0, "ducks/Mill District.png");
     private List<PinPoint> pinList;
     private Button quitButton;
     private Manager manager;
@@ -37,18 +38,26 @@ public class MainGame {
     public MainGame() throws IOException {
 
         String title = "Duck Duck Grey Duck!!";
-        this.backdrop = new Image(0, 0, "ducks/Mill District.png");
-        this.canvas = new CanvasWindow(title, CANVAS_WIDTH, CANVAS_HEIGHT);
-        canvas.add(backdrop);
+        this.canvas = new CanvasWindow(title, 1000, 750);
         
         this.mapInfo = createMapInfo();
-        this.duck = createDuck();
-        this.manager = new Manager(canvas, duck, mapInfo);
-        manager.createMapPoints();
-       
-        run();
+
+        menu(canvas);
         canvas.onClick(e -> System.out.println(e.getPosition()));
+
         
+    }
+
+    public void mainStart(CanvasWindow canvas) throws IOException{
+        
+        canvas.add(backdrop);
+        canvas.draw();
+
+        createDuck();
+        run();
+        
+        manager = new Manager(canvas, duck, mapInfo);
+        manager.createMapPoints();
     }
 
     public MapInfo createMapInfo(){
@@ -78,19 +87,22 @@ public class MainGame {
         //return manager.getPopUpIndex(); 
     }
         
-    
-
-
-
     public void run(){
         canvas.onKeyDown((dt) -> {
             if(manager.getAnimating()){
                 if(checkCollison(duck.duckBounds())){
-                    duck.resetDuck();
-                    canvas.draw();
-                    manager.createPopUp();
+                    canvas.removeAll();
+                    manager.createPopUp(this);
             }
         }
+        // if(manager.getPopUp().getQuit() == true){
+        //     try {
+        //         mainStart(canvas);
+        //     } catch (IOException e) {
+        //         // TODO Auto-generated catch block
+        //         e.printStackTrace();
+        //     }
+        // }
         });
     }
 
@@ -98,20 +110,44 @@ public class MainGame {
      * Creates the buttons for quitting and starting the game; the menu screen
      */
     public void menu(CanvasWindow canvas){
-        title = new GraphicsText();
+        Image egg = new Image(100 , 200, "sus/maxwell-cat.png");
+
+
+        menuTitle = new GraphicsText();
+        menuTitle.setText("Duck, Duck, Gray Duck");
+        menuTitle.setFont("Monospaced", FontStyle.BOLD, 75);
+
         start = new Button("Start");
         quit = new Button("Exit");
-
-        title.setFont(FontStyle.BOLD, (CANVAS_HEIGHT * CANVAS_WIDTH) * 0.5);
-        title.setText("Duck, Duck, Gray Duck");
-        createQuitButton();
+        test = new Button("test");
+        
         quitOnClick();
+
         canvas.add(quit, CANVAS_HEIGHT-quit.getHeight(), CANVAS_WIDTH-quit.getWidth());
+        // canvas.add(egg);
+        canvas.add(start);
+        canvas.add(menuTitle);
+        canvas.add(test); // testing out PopUpWindow
+
+        test.setPosition(200, 250);
+
+        test.onClick(() -> {
+            canvas.removeAll();
+            new PopUpWindow("Mill District", 2, canvas, this);
+        });
+
+        quit.onClick(() -> canvas.closeWindow());
+        start.onClick(() -> {
+                canvas.removeAll();
+                try {
+                    mainStart(canvas);
+                } catch (IOException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+        });
         updateLayout();
-
         canvas.draw();
-
-
     }
 
     /**
@@ -122,7 +158,6 @@ public class MainGame {
         start.setCenter(CANVAS_WIDTH * 0.5, CANVAS_HEIGHT * 0.7);
         quit.setCenter(CANVAS_WIDTH * 0.5, CANVAS_HEIGHT * 0.9);
 
-        addCanvas();
     }
 
     /**

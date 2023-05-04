@@ -8,6 +8,7 @@ import java.util.List;
 
 import javax.crypto.MacSpi;
 import javax.imageio.ImageIO;
+import javax.swing.Popup;
 
 import edu.macalester.graphics.CanvasWindow;
 import edu.macalester.graphics.GraphicsObject;
@@ -27,6 +28,7 @@ public class Manager {
     private ArrayList<Rectangle> rects = new ArrayList<Rectangle>();
     private ArrayList<PinPoint> pins = new ArrayList<PinPoint>();
     private MapInfo mapInfo;
+    private PopUpWindow popUp;
     public int locationIndex;
 
     
@@ -43,8 +45,13 @@ public class Manager {
         canvas.draw();
     }
 
-    public void createPopUp(){
-        PopUpWindow popup = new PopUpWindow(mapInfo.getMap(), getPopUpIndex());
+    public void createPopUp(MainGame mainGame){
+        PopUpWindow popUp = new PopUpWindow(mapInfo.getMap(), getPopUpIndex(), canvas, mainGame);
+
+    }
+
+    public PopUpWindow getPopUp(){
+        return popUp;
     }
 
     public void setPopUpIndex(int locationIndex){
