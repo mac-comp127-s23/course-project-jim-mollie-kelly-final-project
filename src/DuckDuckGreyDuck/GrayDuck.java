@@ -7,16 +7,22 @@ import edu.macalester.graphics.events.Key;
 import edu.macalester.graphics.Point;
 
 public class GrayDuck extends Image{
+    private static final int DUCK_WIDTH = 70;
+    private static final int DUCK_HEIGHT = 40;
 
     /**
      * Instance variables
      */
-    private static final int DUCK_WIDTH = 40;
-    private static final int DUCK_HEIGHT = 60;
     private Image duck;
     private CanvasWindow canvas;
+<<<<<<< Updated upstream
+=======
+  
+>>>>>>> Stashed changes
     private String imagePath;
-    private Double x, y;
+    private Double x;
+    private Double y;
+    public ArrayList<Point> duckBoundList;
     
 
     
@@ -33,9 +39,6 @@ public class GrayDuck extends Image{
         
     }
 
-    /**
-     * Adding things into the canvas
-     */
     public ArrayList<Point> duckBounds(){
 
         ArrayList<Point> duckBoundList = new ArrayList<Point>();
@@ -54,23 +57,37 @@ public class GrayDuck extends Image{
         return duckBoundList;
         
     }
-
     /**
-     * Getter - Gets image path
+     * Getter - 
      */
      public String getImagePath(){
         return imagePath;
     }
 
     /**
-     * Setter - Sets the image path
+     * Getter - 
+     */
+    public double getX2(){
+        return this.getX() + this.getWidth();
+    }
+
+    /**
+     * Getter - 
+     */
+    public double getY2(){
+        return this.getY() + this.getHeight();
+    }
+
+
+    /**
+     * Setter - 
      */
     public void setImageString(String newImagePath){
         this.imagePath = newImagePath;
     }
 
     /**
-     * Allows for horizontal image animation
+     * 
      */
     public void flapHorizontal(String a, String b){
         if(getImagePath().equalsIgnoreCase(a)){
@@ -83,9 +100,6 @@ public class GrayDuck extends Image{
         } 
     }
 
-    /**
-     * Fixes the duck's position to initially start at the middle of the canvas
-     */
     public void resetDuck(){
         x = canvas.getCenter().getX();
         y = canvas.getCenter().getY();
@@ -93,23 +107,23 @@ public class GrayDuck extends Image{
     }
 
     /**
-     * Creates animations to make a flapping animation vertically
+     * Creates animations to make a flapping aniamtion.
      */
     public void flapVertical(){
-        if(getImagePath().equalsIgnoreCase("ducks/grayDuck_1R.png")){
-            duck.setImagePath("ducks/grayDuck_2R.png");
-            setImageString("ducks/grayDuck_2R.png");
+        if(getImagePath().equalsIgnoreCase("grayDuck_1R.png")){
+            duck.setImagePath("grayDuck_2R.png");
+            setImageString("grayDuck_2R.png");
         }
-        if(getImagePath().equalsIgnoreCase("ducks/grayDuck_2R.png")){
-            duck.setImagePath("ducks/grayDuck_1R.png");
-            setImageString("ducks/grayDuck_1R.png");
+        if(getImagePath().equalsIgnoreCase("grayDuck_2R.png")){
+            duck.setImagePath("grayDuck_1R.png");
+            setImageString("grayDuck_1R.png");
         }
-        if(getImagePath().equalsIgnoreCase("ducks/grayDuck_1L.png")){
-            duck.setImagePath("ducks/grayDuck_2L.png");
-            setImageString("ducks/grayDuck_2L.png");
+        if(getImagePath().equalsIgnoreCase("grayDuck_1L.png")){
+            duck.setImagePath("grayDuck_2L.png");
+            setImageString("grayDuck_2L.png");
         } else {
-            duck.setImagePath("ducks/grayDuck_1L.png");
-            setImageString("ducks/grayDuck_1L.png");
+            duck.setImagePath("grayDuck_1L.png");
+            setImageString("grayDuck_1L.png");
         } canvas.draw();
         
     }
@@ -119,7 +133,7 @@ public class GrayDuck extends Image{
      */
     public void addToCanvas(){
         canvas.add(duck);
-        canvas.draw();
+        // canvas.draw();
     }
 
     /**
@@ -132,7 +146,7 @@ public class GrayDuck extends Image{
             if(key.getKey() == Key.RIGHT_ARROW){
                 double paddleRightX = duck.getCenter().getX() + (duck.getWidth()/2);
                 if(paddleRightX < canvasWidth){
-                    flapHorizontal("ducks/grayDuck_1R.png", "ducks/grayDuck_2R.png");
+                    flapHorizontal("grayDuck_1R.png", "grayDuck_2R.png");
                     duck.moveBy(10, 0);
                     x = x + 10;
                 }
@@ -140,7 +154,7 @@ public class GrayDuck extends Image{
             if(key.getKey() == Key.LEFT_ARROW){
                 double paddleLeftX = duck.getCenter().getX() - (duck.getWidth()/2);
                 if(paddleLeftX > 0){
-                    flapHorizontal("ducks/grayDuck_1L.png", "ducks/grayDuck_2L.png");
+                    flapHorizontal("grayDuck_1L.png", "grayDuck_2L.png");
                     duck.moveBy(-10, 0);
                     x = x - 10;
                 }
@@ -165,6 +179,22 @@ public class GrayDuck extends Image{
         canvas.draw();
         });
     }
+
+    
+    public static void main(String[] args) {
+        // String title = "Duck Duck Grey Duck!!";
+        // CanvasWindow canvas = new CanvasWindow(title, 1000, 750);
+        // Image backdrop = new Image(0, 0, "ducks/Mill District.png");
+        // canvas.add(backdrop);
+        // canvas.draw();
+        // new GrayDuck(canvas.getCenter().getX(), canvas.getCenter().getY(), "ducks/grayDuck_1R.png", canvas);
+        // CanvasWindow canvas2 = new CanvasWindow("canvas", 500, 425);
+        // GameMenu run = new GameMenu(canvas2);
+       // PopUpWindow pop = new PopUpWindow("Mill District", 1);
+
+    // }
+}
+
 
    
 }
