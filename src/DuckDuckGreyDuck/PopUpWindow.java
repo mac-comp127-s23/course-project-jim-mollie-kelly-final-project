@@ -12,13 +12,20 @@ import edu.macalester.graphics.ui.Button;
 
 
 public class PopUpWindow {
+    public static final int POPUP_WIDTH = 500;
+    public static final int POPUP_HEIGHT = 500;
+    
     public Button quitButton;
     public CanvasWindow popUp;
     public String location;
     public int locationIndex;
     public boolean quitClicked;
+<<<<<<< Updated upstream
     public Image bird;
     public Image background;
+=======
+
+>>>>>>> Stashed changes
     
     
 
@@ -56,10 +63,16 @@ public class PopUpWindow {
 
     public void createGraphicsText(String info){
         GraphicsText text = new GraphicsText(info);
+<<<<<<< Updated upstream
         popUp.add(text, 0, background.getHeight()+20);
         text.setWrappingWidth(background.getWidth());
         text.setFont(FontStyle.ITALIC, 20);
+=======
+        text.setWrappingWidth(locationIndex);
+        popUp.add(text, 0, 0);
+>>>>>>> Stashed changes
     }
+
 
     public void createQuitButton(){
         this.quitButton = new Button("Return to Map");

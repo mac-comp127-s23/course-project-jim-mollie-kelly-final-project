@@ -7,14 +7,18 @@ import edu.macalester.graphics.events.Key;
 import edu.macalester.graphics.Point;
 
 public class GrayDuck extends Image{
-    private static final int DUCK_WIDTH = 40;
-    private static final int DUCK_HEIGHT = 60;
+    private static final int DUCK_WIDTH = 70;
+    private static final int DUCK_HEIGHT = 40;
 
     /**
      * Instance variables
      */
     private Image duck;
     private CanvasWindow canvas;
+<<<<<<< Updated upstream
+=======
+  
+>>>>>>> Stashed changes
     private String imagePath;
     private Double x;
     private Double y;
@@ -106,20 +110,20 @@ public class GrayDuck extends Image{
      * Creates animations to make a flapping aniamtion.
      */
     public void flapVertical(){
-        if(getImagePath().equalsIgnoreCase("ducks/grayDuck_1R.png")){
-            duck.setImagePath("ducks/grayDuck_2R.png");
-            setImageString("ducks/grayDuck_2R.png");
+        if(getImagePath().equalsIgnoreCase("grayDuck_1R.png")){
+            duck.setImagePath("grayDuck_2R.png");
+            setImageString("grayDuck_2R.png");
         }
-        if(getImagePath().equalsIgnoreCase("ducks/grayDuck_2R.png")){
-            duck.setImagePath("ducks/grayDuck_1R.png");
-            setImageString("ducks/grayDuck_1R.png");
+        if(getImagePath().equalsIgnoreCase("grayDuck_2R.png")){
+            duck.setImagePath("grayDuck_1R.png");
+            setImageString("grayDuck_1R.png");
         }
-        if(getImagePath().equalsIgnoreCase("ducks/grayDuck_1L.png")){
-            duck.setImagePath("ducks/grayDuck_2L.png");
-            setImageString("ducks/grayDuck_2L.png");
+        if(getImagePath().equalsIgnoreCase("grayDuck_1L.png")){
+            duck.setImagePath("grayDuck_2L.png");
+            setImageString("grayDuck_2L.png");
         } else {
-            duck.setImagePath("ducks/grayDuck_1L.png");
-            setImageString("ducks/grayDuck_1L.png");
+            duck.setImagePath("grayDuck_1L.png");
+            setImageString("grayDuck_1L.png");
         } canvas.draw();
         
     }
@@ -129,7 +133,7 @@ public class GrayDuck extends Image{
      */
     public void addToCanvas(){
         canvas.add(duck);
-        canvas.draw();
+        // canvas.draw();
     }
 
     /**
@@ -142,7 +146,7 @@ public class GrayDuck extends Image{
             if(key.getKey() == Key.RIGHT_ARROW){
                 double paddleRightX = duck.getCenter().getX() + (duck.getWidth()/2);
                 if(paddleRightX < canvasWidth){
-                    flapHorizontal("ducks/grayDuck_1R.png", "ducks/grayDuck_2R.png");
+                    flapHorizontal("grayDuck_1R.png", "grayDuck_2R.png");
                     duck.moveBy(10, 0);
                     x = x + 10;
                 }
@@ -150,7 +154,7 @@ public class GrayDuck extends Image{
             if(key.getKey() == Key.LEFT_ARROW){
                 double paddleLeftX = duck.getCenter().getX() - (duck.getWidth()/2);
                 if(paddleLeftX > 0){
-                    flapHorizontal("ducks/grayDuck_1L.png", "ducks/grayDuck_2L.png");
+                    flapHorizontal("grayDuck_1L.png", "grayDuck_2L.png");
                     duck.moveBy(-10, 0);
                     x = x - 10;
                 }
