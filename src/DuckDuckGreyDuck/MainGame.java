@@ -42,7 +42,7 @@ public class MainGame {
         
         this.mapInfo = createMapInfo();
 
-        menu(canvas);
+        menu(canvas, menuTitle);
         canvas.onClick(e -> System.out.println(e.getPosition()));
 
         
@@ -109,7 +109,7 @@ public class MainGame {
     /**
      * Creates the buttons for quitting and starting the game; the menu screen
      */
-    public void menu(CanvasWindow canvas){
+    public void menu(CanvasWindow canvas, GraphicsText menuTitle){
         Image egg = new Image(100 , 200, "sus/maxwell-cat.png");
 
 
@@ -124,7 +124,7 @@ public class MainGame {
         quitOnClick();
 
         canvas.add(quit, CANVAS_HEIGHT-quit.getHeight(), CANVAS_WIDTH-quit.getWidth());
-        // canvas.add(egg);
+        canvas.add(egg);
         canvas.add(start);
         canvas.add(menuTitle);
         canvas.add(test); // testing out PopUpWindow
@@ -146,14 +146,14 @@ public class MainGame {
                     e.printStackTrace();
                 }
         });
-        updateLayout();
+        updateLayout(menuTitle);
         canvas.draw();
     }
 
     /**
      * Updates the position of the menu GUI
      */
-    public void updateLayout(){
+    public void updateLayout(GraphicsText title){
         title.setCenter(CANVAS_WIDTH * 0.5, CANVAS_HEIGHT * 0.25);
         start.setCenter(CANVAS_WIDTH * 0.5, CANVAS_HEIGHT * 0.7);
         quit.setCenter(CANVAS_WIDTH * 0.5, CANVAS_HEIGHT * 0.9);
