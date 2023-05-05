@@ -1,9 +1,5 @@
 package DuckDuckGreyDuck;
 
-import java.awt.List;
-import java.util.ArrayList;
-import java.util.Map;
-
 import edu.macalester.graphics.Image;
 import edu.macalester.graphics.Point;
 

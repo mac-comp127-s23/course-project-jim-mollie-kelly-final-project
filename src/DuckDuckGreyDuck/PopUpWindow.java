@@ -8,7 +8,6 @@ import edu.macalester.graphics.GraphicsGroup;
 import edu.macalester.graphics.GraphicsText;
 import edu.macalester.graphics.Image;
 import edu.macalester.graphics.Rectangle;
-import edu.macalester.graphics.GraphicsObject;
 import edu.macalester.graphics.ui.Button;
 import java.awt.Color;
 import java.io.IOException;
@@ -25,7 +24,6 @@ public class PopUpWindow {
     private GraphicsGroup group;
     private Rectangle outline;
     private MainGame mainGame;
-    // private Manager manager;
     
     
 
@@ -60,33 +58,41 @@ public class PopUpWindow {
         createGraphicsText(mapInfo.getInfo(locationIndex), canvas);
         createQuitButton(canvas);
         quitOnClick(canvas);
-
-        // createPopUp();
-        quitOnClick(canvas);
         canvas.draw();
         
         
     }
 
+    /**
+     * Creates the background and sets it up
+     */
     public void createBackground(Image background, CanvasWindow canvas){
-
         background.setMaxHeight(canvas.getHeight());
         background.setMaxWidth(canvas.getWidth());
         background.setScale(canvas.getWidth() * 0.0015, canvas.getHeight() * 0.00175); // Image are not the same size so it will not always fit the canvas perfectly
         canvas.add(background, 0, 0);
     }
 
+    /**
+     * Creates the bird and readjusts the scale of the bird
+     */
     public void createBird(Image bird, CanvasWindow canvas){
         bird.setMaxHeight(200);
         bird.setScale(3.5, 5);
         canvas.add(bird, canvas.getWidth() - canvas.getWidth() - 50, canvas.getHeight() * 0.6);
     }
 
+    /**
+     * Creates the text on the side of the popup
+     */
     public void createGraphicsText(String info, CanvasWindow canvas){
         GraphicsText text = new GraphicsText(info);
         canvas.add(text, 0, 0);
     }
 
+    /**
+     * Creates the quit button and allows for the user to go back to the main map if this is pressed
+     */
     public void createQuitButton(CanvasWindow canvas){
         quitClicked = false;
         this.quitButton = new Button("Return to Map");
@@ -104,14 +110,9 @@ public class PopUpWindow {
        
     }
 
-    public boolean getQuit(){
-        return quitClicked;
-    }
-    public void setQuit(boolean quit){
-        this.quitClicked = quit;
-    }
-
-
+    /**
+     * Removes everything on the canvas
+     */
     public void quitOnClick(CanvasWindow canvas){
         quitButton.onClick(() -> {
             canvas.removeAll();

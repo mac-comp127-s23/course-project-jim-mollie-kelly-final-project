@@ -1,35 +1,16 @@
 package DuckDuckGreyDuck;
 
-import java.awt.Canvas;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.crypto.MacSpi;
-import javax.imageio.ImageIO;
-import javax.swing.Popup;
-
 import edu.macalester.graphics.CanvasWindow;
-import edu.macalester.graphics.GraphicsObject;
-import edu.macalester.graphics.Image;
-import edu.macalester.graphics.Point;
-
 import java.io.IOException;
-import java.security.Principal;
-import java.awt.Rectangle;
-
 
 public class Manager {
     private GrayDuck duck;
     private PinPoint pin;
     private CanvasWindow canvas;
     private boolean animating = true;
-    private ArrayList<Rectangle> rects = new ArrayList<Rectangle>();
-    private ArrayList<PinPoint> pins = new ArrayList<PinPoint>();
     private MapInfo mapInfo;
     private PopUpWindow popUp;
-    public int locationIndex;
+    private int locationIndex;
 
     
     public Manager(CanvasWindow canvas, GrayDuck duck, MapInfo mapInfo) throws IOException{
@@ -38,6 +19,9 @@ public class Manager {
         this.mapInfo = mapInfo;
     }
 
+    /**
+     * Creates the pin points on the map
+     */
     public void createMapPoints(){
         for(int i = 0; i < mapInfo.getNumLocations(); i++){
             canvas.add(mapInfo.getPin(i));
@@ -45,44 +29,47 @@ public class Manager {
         canvas.draw();
     }
 
+    /**
+     * Creates the popup window
+     */
     public void createPopUp(MainGame mainGame){
         PopUpWindow popUp = new PopUpWindow(mapInfo.getMap(), getPopUpIndex(), canvas, mainGame);
-
     }
 
+    /**
+     * Getter - gets popup window
+     */
     public PopUpWindow getPopUp(){
         return popUp;
     }
 
+    /**
+     * Setter - sets the popup index
+     */
     public void setPopUpIndex(int locationIndex){
         this.locationIndex = locationIndex;
     }
 
-
-  
-
+    /**
+     * Getter - gets the popup index
+     */
     public int getPopUpIndex(){
         return locationIndex;
     }
-    // public void clickPopUp(GraphicsObject o){
-    //     o.onClick(() -> popUp.closeWindow());
-    // }
 
-
-
-
+    /**
+     * Getter - gets the boolean from animating
+     */
     public boolean getAnimating(){
         return this.animating;
     }
 
+    /**
+     * Setter - sets the boolean of animating
+     */
     public void setAnimating(boolean run){
         this.animating = run;
     }
-
-    public void addPins(){
-        
-    }
-
 
     /**
      * When the duck is close to the pin points, the pin point lights up 
@@ -108,9 +95,6 @@ public class Manager {
     //     }
 
     // }
-
-   
-
 
     // public void spawnPoints(PinPoint pin){
     //     PinPoint armory = new PinPoint(561, 12, "pins/point-objects.png", window); // Armory : (561, 12)

@@ -9,9 +9,6 @@ import edu.macalester.graphics.Image;
 import edu.macalester.graphics.Point;
 
 import java.util.ArrayList;
-import java.util.List;
-
-import javax.swing.text.html.HTMLDocument.HTMLReader.HiddenAction;
 
 
 
@@ -24,14 +21,10 @@ public class MainGame {
      */
     private CanvasWindow canvas;
     private Button start, quit, test;
-    private GraphicsText title;
-    private GraphicsText menuTitle;
+    private GraphicsText title, menuTitle;;
     private static final int CANVAS_WIDTH = 1000, CANVAS_HEIGHT = 750;
-    private PinPoint pin;
     private GrayDuck duck;
     private Image backdrop = new Image(0, 0, "ducks/Mill District.png");
-    private List<PinPoint> pinList;
-    private Button quitButton;
     private Manager manager;
     private MapInfo mapInfo;
 
@@ -48,6 +41,9 @@ public class MainGame {
         
     }
 
+    /**
+     * Runs the game after the start button has been clicked
+     */
     public void mainStart(CanvasWindow canvas) throws IOException{
         
         canvas.add(backdrop);
@@ -60,11 +56,17 @@ public class MainGame {
         manager.createMapPoints();
     }
 
+    /**
+     * Returns the background image info
+     */
     public MapInfo createMapInfo(){
         this.mapInfo = new MapInfo("Mill District");
         return mapInfo;
     }
 
+    /**
+     * Creates the duck object that the player moves
+     */
     public GrayDuck createDuck(){
         duck = new GrayDuck(canvas.getCenter().getX(), canvas.getCenter().getY(), "ducks/grayDuck_1R.png", canvas);
         duck.addToCanvas();
@@ -73,6 +75,9 @@ public class MainGame {
         return duck;
     }
 
+    /**
+     * Checks for collision between the duck and the list of pin points
+     */
     public boolean checkCollison(ArrayList<Point> duckBoundList){
         for(int i = 0; i < duckBoundList.size(); i++){
             for (int j = 0; j < mapInfo.getNumLocations(); j++){
@@ -87,6 +92,9 @@ public class MainGame {
         //return manager.getPopUpIndex(); 
     }
         
+    /**
+     * Runs the popup window when there is a collision
+     */
     public void run(){
         canvas.onKeyDown((dt) -> {
             if(manager.getAnimating()){
@@ -95,14 +103,6 @@ public class MainGame {
                     manager.createPopUp(this);
             }
         }
-        // if(manager.getPopUp().getQuit() == true){
-        //     try {
-        //         mainStart(canvas);
-        //     } catch (IOException e) {
-        //         // TODO Auto-generated catch block
-        //         e.printStackTrace();
-        //     }
-        // }
         });
     }
 
@@ -116,11 +116,8 @@ public class MainGame {
         menuTitle = new GraphicsText();
         menuTitle.setText("Duck, Duck, Gray Duck");
         menuTitle.setFont("Monospaced", FontStyle.BOLD, 75);
-
-        start = new Button("Start");
-        quit = new Button("Exit");
-        test = new Button("test");
         
+        createButtons();
         quitOnClick();
 
         canvas.add(quit, CANVAS_HEIGHT-quit.getHeight(), CANVAS_WIDTH-quit.getWidth());
@@ -169,32 +166,31 @@ public class MainGame {
         canvas.add(quit);
     }
 
-    public void buttonWin(Button start){
-        start.onClick(null);
-    }
-
-    // // might take out
-    // public void pinPt(double x, double y){
-    //     PinPoint aPin = new PinPoint(x, y, "pins/point-objects.png");
-    //     canvas.add(aPin);
-    //     pinList.add(aPin);
-    // }
-
+    /**
+     * Adding things into the canvas
+     */
     public void createQuitButton(){
         quit = new Button("Return to Map");
-       // canvas.add(quit, CANVAS_HEIGHT-quit.getHeight(), CANVAS_WIDTH-quit.getWidth());
-        //return quit;
     }
 
+    /**
+     * Creates the buttons on the menu screen
+     */
+    public void createButtons(){
+        start = new Button("Start");
+        quit = new Button("Exit");
+        test = new Button("test");
+    }
+
+    /**
+     * Closes the canvas window
+     */
     public void quitOnClick(){
         quit.onClick(() -> canvas.closeWindow());
     }
 
-
-
     public static void main(String[] args) throws IOException {
         new MainGame();
-
     }
 }
 
