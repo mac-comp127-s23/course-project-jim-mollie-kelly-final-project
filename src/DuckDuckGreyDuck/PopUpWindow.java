@@ -3,9 +3,9 @@ package DuckDuckGreyDuck;
 
 
 import edu.macalester.graphics.CanvasWindow;
+import edu.macalester.graphics.FontStyle;
 import edu.macalester.graphics.GraphicsText;
 import edu.macalester.graphics.Image;
-import edu.macalester.graphics.GraphicsObject;
 import edu.macalester.graphics.ui.Button;
 
 
@@ -17,6 +17,8 @@ public class PopUpWindow {
     public String location;
     public int locationIndex;
     public boolean quitClicked;
+    public Image bird;
+    public Image background;
     
     
 
@@ -31,34 +33,37 @@ public class PopUpWindow {
     }
    
     public void createPopUp(){
-        popUp = new CanvasWindow(location, 500, 500);
+        
         MapInfo mapInfo = new MapInfo(location);
-        createBackground(mapInfo.getBackground(locationIndex));
-        createBird(mapInfo.getBird(locationIndex));
+        this.background = mapInfo.getBackground(locationIndex);
+        background.setMaxHeight(500);
+        popUp = new CanvasWindow(location, (int)background.getWidth(), (int)background.getHeight()+200);
+        createBackground();
+        this.bird = mapInfo.getBird(locationIndex);
+        createBird();
         createGraphicsText(mapInfo.getInfo(locationIndex));
         createQuitButton();
     }
-    public void createBackground(Image background){
-
-        background.setMaxHeight(750);
-        background.setMaxWidth(500);
+    public void createBackground(){
+       
         popUp.add(background, 0, 0);
     }
 
-    public void createBird(Image bird){
+    public void createBird(){
         bird.setMaxHeight(200);
-        popUp.add(bird, 0, 250);
+        popUp.add(bird, 0, background.getHeight()-bird.getHeight());
     }
 
     public void createGraphicsText(String info){
         GraphicsText text = new GraphicsText(info);
-        popUp.add(text, 0, 0);
+        popUp.add(text, 0, background.getHeight()+20);
+        text.setWrappingWidth(background.getWidth());
+        text.setFont(FontStyle.ITALIC, 20);
     }
 
     public void createQuitButton(){
         this.quitButton = new Button("Return to Map");
         popUp.add(quitButton, 0, 0);
-       
     }
 
     public void setQuit(boolean quit){

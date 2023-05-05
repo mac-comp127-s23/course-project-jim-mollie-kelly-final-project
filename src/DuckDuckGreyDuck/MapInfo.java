@@ -1,8 +1,6 @@
 package DuckDuckGreyDuck;
 
-import java.awt.List;
-import java.util.ArrayList;
-import java.util.Map;
+
 
 import edu.macalester.graphics.Image;
 import edu.macalester.graphics.Point;
@@ -27,11 +25,11 @@ public class MapInfo {
     };
 
     private static final String[] MILL_INFO = {
-        "armory string",
-        "gold medal park string",
-        "grain belt sign string",
-        "guthrie string",
-        "mill city museum string",
+        "YEAH, ROCK ‘N’ ROLL BABY! Did you know that in 1982 our very own Minneapolis native - Prince - used the Armory to shoot the music video for his song ‘1999’ in 1982. You should check it out!",
+        "Oh, the Gold Medal Park! It opened in May of 2007 and it is actually among one of Minneapolis' newest parks.Today, the Gold Medal Park sits near the Mississippi River, which offers a pretty nice view of the Stone Arch Bridge, the Guthrie Theater, and the historic Milling District.",
+        "Wow, that’s one heck of a sign! The Grain Belt Beer bottle cap sign is one of the largest freestanding neon signs in the region. Located on Nicollet Island, the Grain Belt Beer sign is approximately 50 feet wide and 40 feet tall!",
+        "Here ye, hear ye! Welcome to the Guthrie Theater! From Broadway to the mighty Mississippi the Guthrie Theater opened on May 7th, 1963, with a production of Hamlet directed by Sir Tyrone Guthrie.",
+        "Ah, the good ol’ ‘Washburn A Mill’; nowadays, this building is known as the ‘Mill City Museum’. After an explosion that demolished the ‘Washburn A Mill’ in 1878 the building was abandoned. Then, in 2003 the ‘Washburn A Mill Complex’ was opened as the ‘Mill City Museum’ to tell the history of the city’s flour milling industry at its height.",
     };
 
     private static final Point[] MILL_PINPOINTS = {

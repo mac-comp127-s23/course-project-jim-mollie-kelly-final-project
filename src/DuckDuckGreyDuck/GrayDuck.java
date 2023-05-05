@@ -14,11 +14,8 @@ public class GrayDuck extends Image{
      * Instance variables
      */
     private Image duck;
-    
     private CanvasWindow canvas;
-    private double size = 100;
     private String imagePath;
-    private PinPoint pin;
     private Double x;
     private Double y;
     public ArrayList<Point> duckBoundList;

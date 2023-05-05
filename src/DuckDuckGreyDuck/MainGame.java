@@ -9,9 +9,6 @@ import edu.macalester.graphics.Image;
 import edu.macalester.graphics.Point;
 
 import java.util.ArrayList;
-import java.util.List;
-
-import javax.swing.text.html.HTMLDocument.HTMLReader.HiddenAction;
 
 
 
@@ -26,11 +23,9 @@ public class MainGame {
     private Button start, quit;
     private GraphicsText title;
     private static final int CANVAS_WIDTH = 1000, CANVAS_HEIGHT = 750;
-    private PinPoint pin;
+
     private GrayDuck duck;
     private Image backdrop;
-    private List<PinPoint> pinList;
-    private Button quitButton;
     private Manager manager;
     private MapInfo mapInfo;
 
@@ -138,12 +133,7 @@ public class MainGame {
         start.onClick(null);
     }
 
-    // // might take out
-    // public void pinPt(double x, double y){
-    //     PinPoint aPin = new PinPoint(x, y, "pins/point-objects.png");
-    //     canvas.add(aPin);
-    //     pinList.add(aPin);
-    // }
+  
 
     public void createQuitButton(){
         quit = new Button("Return to Map");
