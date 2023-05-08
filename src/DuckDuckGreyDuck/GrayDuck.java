@@ -7,24 +7,16 @@ import edu.macalester.graphics.events.Key;
 import edu.macalester.graphics.Point;
 
 public class GrayDuck extends Image{
-    private static final int DUCK_WIDTH = 70;
-    private static final int DUCK_HEIGHT = 40;
 
     /**
      * Instance variables
      */
     private Image duck;
     private CanvasWindow canvas;
-<<<<<<< Updated upstream
-=======
-  
->>>>>>> Stashed changes
     private String imagePath;
-    private Double x;
-    private Double y;
-    public ArrayList<Point> duckBoundList;
-    
-
+    private Double x, y;
+    private ArrayList<Point> duckBoundList;
+    private static final int DUCK_WIDTH = 70, DUCK_HEIGHT = 40;;
     
     public GrayDuck(double x, double y, String imagePath, CanvasWindow canvas) {
         super(x, y, imagePath);
@@ -39,6 +31,9 @@ public class GrayDuck extends Image{
         
     }
 
+    /**
+     * gets the bounds of the ducks and puts it in an array list
+     */
     public ArrayList<Point> duckBounds(){
 
         ArrayList<Point> duckBoundList = new ArrayList<Point>();
@@ -57,37 +52,23 @@ public class GrayDuck extends Image{
         return duckBoundList;
         
     }
+    
     /**
-     * Getter - 
+     * Getter - gets the image path
      */
      public String getImagePath(){
         return imagePath;
     }
 
     /**
-     * Getter - 
-     */
-    public double getX2(){
-        return this.getX() + this.getWidth();
-    }
-
-    /**
-     * Getter - 
-     */
-    public double getY2(){
-        return this.getY() + this.getHeight();
-    }
-
-
-    /**
-     * Setter - 
+     * Setter - sets the image path (takes in a string)
      */
     public void setImageString(String newImagePath){
         this.imagePath = newImagePath;
     }
 
     /**
-     * 
+     * Animation for when the duck moves horizontally
      */
     public void flapHorizontal(String a, String b){
         if(getImagePath().equalsIgnoreCase(a)){
@@ -100,6 +81,9 @@ public class GrayDuck extends Image{
         } 
     }
 
+    /**
+     * Sets the duck's initial position
+     */
     public void resetDuck(){
         x = canvas.getCenter().getX();
         y = canvas.getCenter().getY();
@@ -107,7 +91,7 @@ public class GrayDuck extends Image{
     }
 
     /**
-     * Creates animations to make a flapping aniamtion.
+     * Animation for when the duck moves vertically
      */
     public void flapVertical(){
         if(getImagePath().equalsIgnoreCase("grayDuck_1R.png")){
@@ -129,11 +113,10 @@ public class GrayDuck extends Image{
     }
 
     /**
-     * Adds things into the canvas
+     * Adds things to the canvas
      */
     public void addToCanvas(){
         canvas.add(duck);
-        // canvas.draw();
     }
 
     /**
@@ -179,22 +162,4 @@ public class GrayDuck extends Image{
         canvas.draw();
         });
     }
-
-    
-    public static void main(String[] args) {
-        // String title = "Duck Duck Grey Duck!!";
-        // CanvasWindow canvas = new CanvasWindow(title, 1000, 750);
-        // Image backdrop = new Image(0, 0, "ducks/Mill District.png");
-        // canvas.add(backdrop);
-        // canvas.draw();
-        // new GrayDuck(canvas.getCenter().getX(), canvas.getCenter().getY(), "ducks/grayDuck_1R.png", canvas);
-        // CanvasWindow canvas2 = new CanvasWindow("canvas", 500, 425);
-        // GameMenu run = new GameMenu(canvas2);
-       // PopUpWindow pop = new PopUpWindow("Mill District", 1);
-
-    // }
-}
-
-
-   
 }

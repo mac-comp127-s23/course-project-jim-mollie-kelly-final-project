@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class DestinationsList {
 
     private ArrayList<Destinations> destinationList;
+    
     public DestinationsList(){
         destinationList = new ArrayList<Destinations>();
     }

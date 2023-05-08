@@ -7,15 +7,8 @@ import edu.macalester.graphics.GraphicsText;
 import edu.macalester.graphics.ui.Button;
 import edu.macalester.graphics.Image;
 import edu.macalester.graphics.Point;
-
-import java.util.ArrayList;
-<<<<<<< Updated upstream
-
-
-
-=======
 import java.awt.Color;
->>>>>>> Stashed changes
+import java.util.ArrayList;
 import java.io.IOException;
 
 public class MainGame {
@@ -23,26 +16,18 @@ public class MainGame {
     /**
      * Instance variables
      */
-    public static final String TITLE = "Duck Duck Grey Duck!";
+    private static final String TITLE = "Duck Duck Grey Duck!";
     private CanvasWindow canvas;
-    private Button start, quit, test;
-    private GraphicsText title;
+    private Button start, quit;
+    private GraphicsText title, menuTitle;
     private static final int CANVAS_WIDTH = 1000, CANVAS_HEIGHT = 750;
-<<<<<<< Updated upstream
-
-=======
->>>>>>> Stashed changes
     private GrayDuck duck;
-    private GraphicsText menuTitle;
     private Image backdrop;
     private Manager manager;
     private MapInfo mapInfo;
     
 
     public MainGame() throws IOException {
-        
-        
-        
         this.backdrop = new Image(0, 0, "ducks/Mill District.png");
         this.canvas = new CanvasWindow(TITLE, CANVAS_WIDTH, CANVAS_HEIGHT);
         canvas.add(backdrop);
@@ -57,12 +42,17 @@ public class MainGame {
         
     }
 
-    
+    /**
+     * creates the mapInfo variable
+     */
     public MapInfo createMapInfo(){
         this.mapInfo = new MapInfo("Mill District");
         return mapInfo;
     }
 
+    /**
+     * initializes and creates the duck, while adding it to canvas and setting its position
+     */
     public GrayDuck createDuck(){
         duck = new GrayDuck(canvas.getCenter().getX(), canvas.getCenter().getY(), "ducks/grayDuck_1R.png", canvas);
         duck.addToCanvas();
@@ -70,6 +60,9 @@ public class MainGame {
         return duck;
     }
 
+    /**
+     * checks for collisions between the duck and the pin points
+     */
     public boolean checkCollison(ArrayList<Point> duckBoundList){
         for(int i = 0; i < duckBoundList.size(); i++){
             for (int j = 0; j < mapInfo.getNumLocations(); j++){
@@ -81,9 +74,11 @@ public class MainGame {
                 }
         }
         return false;  
-        //return manager.getPopUpIndex(); 
     }
-        
+    
+    /**
+     * sets up the menu screen of the game
+     */
     public void menu(CanvasWindow canvas, GraphicsText menuTitle){
       
         Image egg = new Image(100 , 200, "maxwell-cat.png");
@@ -98,7 +93,6 @@ public class MainGame {
         quit = new Button("Exit");
         title = new GraphicsText(TITLE);
     
-      
         createQuitButton();
         quitOnClick();
         canvas.add(skyline);
@@ -108,8 +102,6 @@ public class MainGame {
         canvas.add(start);
         canvas.add(menuTitle);
         
-
-
         quit.onClick(() -> canvas.closeWindow());
         start.onClick(() -> {
                 canvas.removeAll();
@@ -124,7 +116,9 @@ public class MainGame {
         updateLayout(menuTitle);
     }
 
-
+    /**
+     * runs the main game when the start button is clicked
+     */
     public void mainStart(CanvasWindow canvas) throws IOException{
 
         canvas.add(backdrop);
@@ -136,6 +130,10 @@ public class MainGame {
         manager.createMapPoints();
         }
    
+
+    /**
+     * checks for collisions and creates the popup window when there is one
+     */
     public void run(){
         canvas.onKeyDown((dt) -> {
             if(manager.getAnimating()){
@@ -147,11 +145,6 @@ public class MainGame {
         }
         });
     }
-
-    /**
-     * Creates the buttons for quitting and starting the game; the menu screen
-     */
-   
 
     /**
      * Updates the position of the menu GUI
@@ -173,22 +166,19 @@ public class MainGame {
         canvas.add(quit);
     }
 
-    public void buttonWin(Button start){
-        start.onClick(null);
-    }
-
-  
-
+    /**
+     * creates the quit button
+     */
     public void createQuitButton(){
         quit = new Button("Return to Map");
-       // canvas.add(quit, CANVAS_HEIGHT-quit.getHeight(), CANVAS_WIDTH-quit.getWidth());
-        //return quit;
     }
 
+    /**
+     * when quit button is clicked, the window closes
+     */
     public void quitOnClick(){
         quit.onClick(() -> canvas.closeWindow());
     }
-
 
     public static void main(String[] args) throws IOException {
         new MainGame();
