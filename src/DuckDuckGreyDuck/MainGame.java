@@ -18,13 +18,14 @@ public class MainGame {
      */
     private static final String TITLE = "Duck Duck Grey Duck!";
     private CanvasWindow canvas;
-    private Button start, quit;
-    private GraphicsText title, menuTitle;
+    private Button start = new Button("Start"), quit = new Button("Exit");
+    private GraphicsText title, menuTitle = new GraphicsText(TITLE, 0, 0);
     private static final int CANVAS_WIDTH = 1000, CANVAS_HEIGHT = 750;
     private GrayDuck duck;
-    private Image backdrop;
+    private Image backdrop, egg = new Image(100 , 200, "maxwell-cat.png"), skyline = new Image(0, 0, "skyline.png");;
     private Manager manager;
     private MapInfo mapInfo;
+    
     
 
     public MainGame() throws IOException {
@@ -35,6 +36,7 @@ public class MainGame {
         this.mapInfo = createMapInfo();
         this.duck = createDuck();
         this.manager = new Manager(canvas, duck, mapInfo);
+
         manager.createMapPoints();
         menu(canvas, menuTitle);
         run();
@@ -80,17 +82,11 @@ public class MainGame {
      * sets up the menu screen of the game
      */
     public void menu(CanvasWindow canvas, GraphicsText menuTitle){
-      
-        Image egg = new Image(100 , 200, "maxwell-cat.png");
-        Image skyline = new Image(0, 0, "skyline.png");
         skyline.setScale(2.75);
-        menuTitle = new GraphicsText(TITLE, 0, 0);
 
         menuTitle.setFont("Monospaced", FontStyle.BOLD, 75);
         menuTitle.setFillColor(Color.blue);
-
-        start = new Button("Start");
-        quit = new Button("Exit");
+        
         title = new GraphicsText(TITLE);
     
         createQuitButton();
@@ -103,17 +99,24 @@ public class MainGame {
         canvas.add(menuTitle);
         
         quit.onClick(() -> canvas.closeWindow());
-        start.onClick(() -> {
-                canvas.removeAll();
-                try {
-                    mainStart(canvas);
-                    canvas.draw();
-                } catch (IOException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
-        });
+        startGame(start);
         updateLayout(menuTitle);
+    }
+
+    /**
+     * when the button is clicked, the main game runs
+     */
+    public void startGame(Button start){
+        start.onClick(() -> {
+            canvas.removeAll();
+            try {
+                mainStart(canvas);
+                canvas.draw();
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+    });
     }
 
     /**
