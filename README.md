@@ -4,6 +4,7 @@
  Project Description: Take a tour around the Twin Cities through a game of hide-and-seek with ducks.
  - Technical Requirements: Installation of Java 17
  - Main Class For Game: MainGame.java
+ - Arrow keys are used in order to play
 
 ## Acknowledge to References: 
 For insperation we used the traditional children's game "Duck, Duck Grey Duck" - also known as "Duck, Duck, Goose" - and "Hide-and-Seek." We decided to combine both of these childhood games in order to provide the user with a tour of the most notable sites in the Twin Cities.
