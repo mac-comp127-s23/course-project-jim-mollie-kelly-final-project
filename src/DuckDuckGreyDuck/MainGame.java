@@ -81,7 +81,7 @@ public class MainGame {
      */
     public void menu(CanvasWindow canvas, GraphicsText menuTitle){
       
-        Image egg = new Image(100 , 200, "maxwell-cat.png");
+        Image egg = new Image(300 , 200, "pixel-maxwell-cat.png");
         Image skyline = new Image(0, 0, "skyline.png");
         skyline.setScale(2.75);
         menuTitle = new GraphicsText(TITLE, 0, 0);
@@ -176,7 +176,7 @@ public class MainGame {
      * creates the quit button
      */
     public void createQuitButton(){
-        quit = new Button("Return to Map");
+        quit = new Button("Quit");
     }
 
     /**
