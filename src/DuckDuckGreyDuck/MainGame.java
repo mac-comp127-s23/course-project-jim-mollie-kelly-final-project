@@ -117,7 +117,6 @@ public class MainGame {
                 mainStart(canvas);
                 canvas.draw();
             } catch (IOException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
     });
